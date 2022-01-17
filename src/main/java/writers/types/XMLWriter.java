@@ -7,6 +7,7 @@ import writers.Writer;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.annotation.Annotation;
 import java.util.*;
 
 public class XMLWriter extends Writer implements Write {

@@ -16,12 +16,14 @@ public class LabTestTransforming implements Transform {
         List<String[]> updatedData = new ArrayList<>();
         for (String[] string: data) {
             int arrLength = string.length;
-            String[] tmp = copyArrPlusPlaces(string, 3);
+            int idNum = Integer.parseInt(string[0]);
+            int idType = Integer.parseInt(string[0]);
             try {
-                person = healthCare.fetchInfo(Integer.parseInt(string[0]), Integer.parseInt(string[1]));
+                person = healthCare.fetchInfo(idNum, idType);
             } catch (InvalidIdException e) {
                 e.printStackTrace();
             }
+            String[] tmp = copyArrPlusPlaces(string, 3);
             tmp[arrLength] = person.getJoinDate().toString();
             tmp[arrLength + 1] = String.valueOf(person.getHealthCareId());
             tmp[arrLength + 2] = person.getHealthCareName();
