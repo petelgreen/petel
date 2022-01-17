@@ -1,15 +1,15 @@
 import readers.Read;
 import readers.factory.ReadFactory;
-import transform.LabTestTransforming;
+import transform.PositivePeopleTransforming;
 import transform.Transform;
 import transform.factory.TransformFactory;
 import writers.Write;
 import writers.factory.WriteFactory;
 import writers.keys.KeysCreate;
-import writers.types.JSONWriter;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
 
@@ -27,11 +27,18 @@ public class Main {
         Transform transform = transformFactory.getTransform("lab test");
         transform.transform(labTests);
 
-        Write jsonWriter = writeFactory.getWriter("json");
+        Write jsonWriter = writeFactory.getWriter("json length limit");
         jsonWriter.write(madaReports, "C:\\Users\\yoles\\Desktop\\petel\\source\\AJson\\mada", keys.getMadaRepoKeys());
 
         Write xmlWriter = writeFactory.getWriter("xml");
         xmlWriter.write(labTests, "C:\\Users\\yoles\\Desktop\\petel\\source\\LEBTESTS\\test", keys.getLabKeys());
+
+        String path = "C:\\Users\\yoles\\Desktop\\petel\\source\\POSITIVE_LAB_TESTS\\result";
+        List<String[]> positivePeople = new PositivePeopleTransforming().transform(madaReports, labTests);
+        Write jsonWriterWithSizeLimit = writeFactory.getWriter("json size limit");
+        jsonWriterWithSizeLimit.write(positivePeople, path, keys.getPositivePeopleKeys());
+
+
 
     }
 

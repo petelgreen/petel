@@ -11,16 +11,18 @@ public class PositivePeopleTransforming {
         List<String[]> result = new ArrayList<>();
         Map<String, String[]> mdaReportsMap = convertListToMap(madaReports);
         for (String[] labTest: labTests) {
-            int currRsltIndex = 0;
-            String idNum = labTest[0];
-            String[] matchingMadaReport = new String[12];
-            copyArr(mdaReportsMap.get(idNum), matchingMadaReport);
-            String[] rslt = new String[16];
-            currRsltIndex = copyArrayInRange(matchingMadaReport, rslt, 1, 8, currRsltIndex);
-            currRsltIndex = copyArrayInRange(labTest, rslt, 5, 6, currRsltIndex);
-            currRsltIndex = copyArrayInRange(matchingMadaReport, rslt, 10, 11, currRsltIndex);
-            currRsltIndex = copyArrayInRange(labTest, rslt, 7, 10, currRsltIndex);
-            result.add(rslt);
+            if (labTest[8].equals("1") && (mdaReportsMap.get(labTest[0])) != null) {
+                int currRsltIndex = 0;
+                String idNum = labTest[0];
+                String[] matchingMadaReport = new String[12];
+                copyArr(mdaReportsMap.get(idNum), matchingMadaReport);
+                String[] rslt = new String[16];
+                currRsltIndex = copyArrayInRange(matchingMadaReport, rslt, 1, 8, currRsltIndex);
+                currRsltIndex = copyArrayInRange(labTest, rslt, 5, 6, currRsltIndex);
+                currRsltIndex = copyArrayInRange(matchingMadaReport, rslt, 10, 11, currRsltIndex);
+                currRsltIndex = copyArrayInRange(labTest, rslt, 7, 10, currRsltIndex);
+                result.add(rslt);
+            }
         }
         return result;
     }
@@ -28,9 +30,17 @@ public class PositivePeopleTransforming {
     private Map<String, String[]> convertListToMap(List<String[]> list) {
         Map<String, String[]> map = new HashMap<>();
         for (String[] string: list) {
-            map.put(string[1], string);
+            String[] tmp =  copyArray(string);
+            map.put(string[1], tmp);
         }
         return map;
+    }
+    private String[] copyArray(String[] arr) {
+        String[] copy = new String[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            copy[i] = arr[i];
+        }
+        return copy;
     }
 
     private void copyArr(String[] arr, String[] copy) {

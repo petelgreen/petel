@@ -1,7 +1,8 @@
 package writers.factory;
 
 import writers.Write;
-import writers.types.JSONWriter;
+import writers.types.JSONWriterLengthLimit;
+import writers.types.JSONWriterSizeLimit;
 import writers.types.XMLWriter;
 
 import java.util.LinkedHashMap;
@@ -12,7 +13,8 @@ public class WriteFactory extends AbstractFactory{
 
     public WriteFactory() {
         writers = new LinkedHashMap<>();
-        writers.put("json", new JSONWriter());
+        writers.put("json length limit", new JSONWriterLengthLimit());
+        writers.put("json size limit", new JSONWriterSizeLimit());
         writers.put("xml", new XMLWriter());
     }
 
