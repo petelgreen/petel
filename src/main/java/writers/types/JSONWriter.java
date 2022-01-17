@@ -1,9 +1,11 @@
-package writers;
+package writers.types;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import writers.Write;
+import writers.Writer;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,9 +14,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class JSONWriter implements Write {
+public class JSONWriter extends Writer implements Write {
     @Override
-    public void write(List<String[]> data, String path) {
+    public void write(List<String[]> data, String path, List<String> keys) {
         int filesCount = 1;
         int objectsCount = 0;
         File file = null;
@@ -34,20 +36,7 @@ public class JSONWriter implements Write {
                 objectsCount = 0;
                 map = null;
             }
-            map = new LinkedHashMap<String, Object>();
-            map.put("mdaCode", string[0]);
-            map.put("IDNum", string[1]);
-            map.put("IDType", string[2]);
-            map.put("firstName", string[3]);
-            map.put("lastName", string[4]);
-            map.put("city", string[5]);
-            map.put("street", string[6]);
-            map.put("buildingNumber", string[7]);
-            map.put("barcode", string[8]);
-            map.put("getDate", string[9]);
-            map.put("takeDate", string[10]);
-            map.put("resultDate", string[11]);
-            jsonArray.add(map);
+            jsonArray.add(CreateValuesANDKeysMap(keys, string));
             objectsCount++;
 }
     file = new File(path + filesCount + ".json");

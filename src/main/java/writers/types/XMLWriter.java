@@ -1,19 +1,19 @@
-package writers;
+package writers.types;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import transform.LabTestTransform;
+import writers.Write;
+import writers.Writer;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class XMLWriter implements Write{
+public class XMLWriter extends Writer implements Write {
     @Override
-    public void write(List<String[]> data, String path) {
+    public void write(List<String[]> data, String path, List<String> keys) {
         XmlMapper mapper = new XmlMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        LabTestTransform transform;
         int filesCount = 1;
         int objectsCount = 0;
         File file = null;
@@ -31,23 +31,7 @@ public class XMLWriter implements Write{
                 filesCount++;
                 objectsCount = 0;
             }
-            map = new LinkedHashMap<String, Object>();
-            transform = new LabTestTransform(string[0], string[1]);
-            map.put("IDNum", string[0]);
-            map.put("IDType", string[1]);
-            map.put("firstName", string[2]);
-            map.put("lastName", string[3]);
-            map.put("resultDate", string[4]);
-            map.put("birthDate", string[5]);
-            map.put("labCode", string[6]);
-            map.put("stickerNumber", string[7]);
-            map.put("resultTestCorona", string[8]);
-            map.put("variant", string[9]);
-            map.put("testType", string[10]);
-            map.put("joinDate", string[11]);
-            map.put("healthCareId", string[12]);
-            map.put("healthCareName", string[13]);
-            xmlList.add(map);
+            xmlList.add(CreateValuesANDKeysMap(keys, string));
             objectsCount++;
         }
         file = new File(path + filesCount + ".xml");
@@ -57,4 +41,5 @@ public class XMLWriter implements Write{
             e.printStackTrace();
         }
     }
+
 }

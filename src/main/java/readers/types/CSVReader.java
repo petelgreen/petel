@@ -1,6 +1,7 @@
-package readers;
+package readers.types;
 
 import com.opencsv.CSVReaderBuilder;
+import readers.Read;
 
 import java.io.File;
 import java.io.FileNotFoundException;

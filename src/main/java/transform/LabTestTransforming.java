@@ -1,27 +1,56 @@
 package transform;
 
+import health_care_provider.HealthCareInfoProvider;
+import health_care_provider.errors.InvalidIdException;
+import health_care_provider.models.PersonInsured;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class LabTestTransforming implements Transform {
-    private LabTestTransform labTest;
+    private HealthCareInfoProvider healthCare = new HealthCareInfoProvider();
+    private PersonInsured person;
 
     @Override
-    public List<String[]> transform(List<String[]> data) {
+    public void transform(List<String[]> data) {
         List<String[]> updatedData = new ArrayList<>();
         for (String[] string: data) {
-            String[] tmp = new String[string.length + 3];
-            int i;
-            for (i = 0; i < string.length; i++) {
-                tmp[i] = string[i];
+            int arrLength = string.length;
+            String[] tmp = copyArrPlusPlaces(string, 3);
+            try {
+                person = healthCare.fetchInfo(Integer.parseInt(string[0]), Integer.parseInt(string[1]));
+            } catch (InvalidIdException e) {
+                e.printStackTrace();
             }
-            labTest = new LabTestTransform(string[0], string[1]);
-            tmp[i] = labTest.getJoinDate();
-            tmp[i + 1] = labTest.getHealthCareId();
-            tmp[i + 2] = labTest.getHealthCareName();
+            tmp[arrLength] = person.getJoinDate().toString();
+            tmp[arrLength + 1] = String.valueOf(person.getHealthCareId());
+            tmp[arrLength + 2] = person.getHealthCareName();
             updatedData.add(tmp);
         }
-        return updatedData;
+        copyList(data, updatedData);
+    }
 
+
+    private String[] copyArrPlusPlaces(String[] arr, int emptyPlaces) {
+        String[] tmp = new String[arr.length + emptyPlaces];
+        int i;
+        for (i = 0; i < arr.length; i++) {
+            tmp[i] = arr[i];
+        }
+        return tmp;
+    }
+    private String[] copyArr(String[] arr) {
+        String[] copy = new String[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            copy[i] = arr[i];
+        }
+        return copy;
+    }
+    private void copyList(List<String[]> data, List<String[]> updatedData) {
+        data.clear();
+        for (String[] string: updatedData) {
+            String[] tmp = copyArr(string);
+            data.add(tmp);
+        }
     }
 }

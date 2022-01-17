@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface Transform {
 
-    List<String[]> transform(List<String[]> data);
+    void transform(List<String[]> data);
 }
