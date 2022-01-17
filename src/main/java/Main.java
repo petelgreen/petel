@@ -1,4 +1,5 @@
 import readers.CSVReader;
+import transform.LabTestTransforming;
 import writers.XMLWriter;
 
 import java.util.List;
@@ -12,6 +13,8 @@ public class Main {
         String resourcePath = "C:\\Users\\yoles\\Desktop\\petel\\hospital\\src\\main\\resources\\LabTests.csv";
         List<String[]> list = csvReader.read(resourcePath);
         XMLWriter xmlWriter = new XMLWriter();
-        xmlWriter.write(list, writePath);
+        LabTestTransforming transforming = new LabTestTransforming();
+        List<String[]> updatedList = transforming.transform(list);
+        xmlWriter.write(updatedList, writePath);
     }
 }

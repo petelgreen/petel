@@ -44,9 +44,9 @@ public class XMLWriter implements Write{
             map.put("resultTestCorona", string[8]);
             map.put("variant", string[9]);
             map.put("testType", string[10]);
-            map.put("joinDate", transform.getJoinDate());
-            map.put("healthCareId", transform.getHealthCareId());
-            map.put("healthCareName", transform.getHealthCareName());
+            map.put("joinDate", string[11]);
+            map.put("healthCareId", string[12]);
+            map.put("healthCareName", string[13]);
             xmlList.add(map);
             objectsCount++;
         }
