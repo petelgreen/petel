@@ -3,5 +3,5 @@ package readers;
 import java.util.List;
 
 public interface Read {
-    List<String[]> read();
+    List<String[]> read(String path);
 }

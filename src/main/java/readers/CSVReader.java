@@ -11,8 +11,8 @@ import java.util.List;
 public class CSVReader implements Read {
 
     @Override
-    public List<String[]> read() {
-        File file = new File("C:\\Users\\yoles\\Desktop\\petel\\hospital\\src\\main\\resources\\MadaReports.csv");
+    public List<String[]> read(String path) {
+        File file = new File(path);
         List<String[]> allData = null;
         {
             try {
