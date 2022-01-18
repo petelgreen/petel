@@ -7,7 +7,7 @@ import health_care_provider.models.PersonInsured;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LabTestTransforming implements Transform {
+public class LabTestTransforming extends TransformBasic implements Transform {
     private HealthCareInfoProvider healthCare = new HealthCareInfoProvider();
     private PersonInsured person;
 
@@ -30,29 +30,5 @@ public class LabTestTransforming implements Transform {
             updatedData.add(tmp);
         }
         copyList(data, updatedData);
-    }
-
-
-    private String[] copyArrPlusPlaces(String[] arr, int emptyPlaces) {
-        String[] tmp = new String[arr.length + emptyPlaces];
-        int i;
-        for (i = 0; i < arr.length; i++) {
-            tmp[i] = arr[i];
-        }
-        return tmp;
-    }
-    private String[] copyArr(String[] arr) {
-        String[] copy = new String[arr.length];
-        for (int i = 0; i < arr.length; i++) {
-            copy[i] = arr[i];
-        }
-        return copy;
-    }
-    private void copyList(List<String[]> data, List<String[]> updatedData) {
-        data.clear();
-        for (String[] string: updatedData) {
-            String[] tmp = copyArr(string);
-            data.add(tmp);
-        }
     }
 }
