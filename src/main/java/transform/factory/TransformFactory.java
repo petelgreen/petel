@@ -1,6 +1,7 @@
 package transform.factory;
 
 import transform.LabTestTransforming;
+import transform.SerologyTransform;
 import transform.Transform;
 
 import java.util.HashMap;
@@ -12,6 +13,7 @@ public class TransformFactory extends AbstractFactory {
     public TransformFactory() {
         transformers = new HashMap<>();
         transformers.put("lab test", new LabTestTransforming());
+        transformers.put("serology", new SerologyTransform());
     }
 
     @Override

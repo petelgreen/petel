@@ -4,6 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KeysCreate {
+
+    public List<String> getSerologyTestsKeys() {
+        List<String> keys = new ArrayList<>();
+        keys.add("IDNum");
+        keys.add("IDType");
+        keys.add("firstName");
+        keys.add("lastName");
+        keys.add("resultDate");
+        keys.add("birthDate");
+        keys.add("labCode");
+        keys.add("stickerNumber");
+        keys.add("antidotes");
+        keys.add("kitNumber");
+        keys.add("isEnoughAntidotes");
+        return keys;
+    }
     public List<String> getMadaRepoKeys() {
         List<String> keys = new ArrayList<>();
         keys.add("mdaCode");

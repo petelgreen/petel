@@ -3,6 +3,7 @@ package writers.factory;
 import writers.Write;
 import writers.types.JSONWriterLengthLimit;
 import writers.types.JSONWriterSizeLimit;
+import writers.types.SQLWriter;
 import writers.types.XMLWriter;
 
 import java.util.LinkedHashMap;
@@ -16,6 +17,7 @@ public class WriteFactory extends AbstractFactory{
         writers.put("json length limit", new JSONWriterLengthLimit());
         writers.put("json size limit", new JSONWriterSizeLimit());
         writers.put("xml", new XMLWriter());
+        writers.put("sql", new SQLWriter());
     }
 
     @Override

@@ -1,25 +1,34 @@
 package transform.vailidation;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class SerologyTestsValidation {
 
     public void valid(List<String[]> data) {
         Set<Boolean> validations;
+        List<String[]> toDelete = new ArrayList<>();
         for (String[] string: data) {
             validations = new HashSet<>();
             String idNum = string[0];
             int idType = Integer.parseInt(string[1]);
             String labcode = string[6];
             validations.add(isIDNumValid(idNum, idType));
+            validations.add(isLengthValid(string));
             validations.add(isLabcodeValid(labcode));
             if (validations.contains(false)) {
-                data.remove(string);
+                toDelete.add(string);
             }
         }
+        for (String[] string: toDelete) {
+            data.remove(string);
+        }
+    }
+
+    private boolean isLengthValid(String[] string) {
+        if (string.length == 10) {
+            return true;
+        }
+        return false;
     }
 
     private boolean isIDNumValid(String idNum, int idType) {
